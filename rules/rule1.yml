@@ -1,0 +1,24 @@
+title: Registry Run Key Persistence
+id: 9dc38e24-0133-4d01-af2e-26ed93051e17
+status: experimental
+description: Detects a new value written to the CurrentVersion\Run registry key, commonly used for persistence.
+
+logsource:
+  category: registry_set
+  product: windows
+
+detection:
+  selection:
+    TargetObject|contains: '\CurrentVersion\Run\'
+  condition: selection
+
+level: medium
+
+falsepositives:
+  - Endpoint monitoring, asset management, or antivirus agents configured to auto-start on login.
+  - Backup software configured to run automatically so it is ready for scheduled or triggered backups.
+  - Legitimate software installers that register components (for example, cloud storage clients such as OneDrive) to auto-start.
+
+tags:
+  - attack.persistence
+  - attack.t1547.001
