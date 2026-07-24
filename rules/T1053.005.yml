@@ -15,7 +15,7 @@ logsource:
 detection:
   selection:
     CommandLine|contains|all:
-      - 'schtasks.exe'
+      - 'schtasks'
       - '/create'
       - '/ru system'
       - '/tr'
