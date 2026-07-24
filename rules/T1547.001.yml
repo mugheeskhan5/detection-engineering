@@ -17,7 +17,7 @@ level: medium
 falsepositives:
   - Endpoint monitoring, asset management, or antivirus agents configured to auto-start on login.
   - Backup software configured to run automatically so it is ready for scheduled or triggered backups.
-  - Legitimate software installers that register components (for example, cloud storage clients such as OneDrive) to auto-start.
+  - Legitimate software installers that register components to auto-start.
 
 tags:
   - attack.persistence
