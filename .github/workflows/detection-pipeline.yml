@@ -1,0 +1,16 @@
+name: Detection Engineering Pipeline
+on:
+  push:
+    paths:
+      - rules/**
+jobs:
+  test:
+    runs-on:
+      - self-hosted
+      - linux
+    env:
+      WINRM_PASSWORD: ${{ secrets.WINRM_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run pipeline
+        run: python3 scripts/pipeline.py
