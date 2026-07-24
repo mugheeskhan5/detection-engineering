@@ -97,6 +97,7 @@ def trigger_atomic(session, command, args):
 
 
 if __name__ == "__main__":
+    os.makedirs("results", exist_ok=True)
     session = winrm.Session(
         'http://192.168.86.128:5985/wsman',
         auth=('test',os.environ["WINRM_PASSWORD"]),
