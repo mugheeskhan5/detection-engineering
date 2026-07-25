@@ -172,7 +172,7 @@ if __name__ == "__main__":
             "trigger_args": [
                 "/create",
                 "/tn",
-                "T1053_005_203",
+                "T1053_005_206",
                 "/sc",
                 "onstart",
                 "/ru",
