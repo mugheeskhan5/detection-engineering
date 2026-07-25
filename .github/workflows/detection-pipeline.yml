@@ -8,9 +8,20 @@ jobs:
     runs-on:
       - self-hosted
       - linux
+    permissions:
+      contents: write
     env:
       WINRM_PASSWORD: ${{ secrets.WINRM_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run pipeline
         run: python3 scripts/pipeline.py
+      - name: Commit updated heatmap
+        run: |
+          git config user.name mugheeskhan5
+          git config user.email khanmughees587@gmail.com
+          git add heatmap_layer.json
+          git diff --staged --quiet || git commit -m "Auto-update heatmap from pipeline run"
+          git push
