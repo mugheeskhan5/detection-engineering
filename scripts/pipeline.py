@@ -8,6 +8,7 @@ from sigma.pipelines.elasticsearch import ecs_windows
 from elasticsearch import Elasticsearch
 import json
 import os
+import glob
 
 es = Elasticsearch(
     "https://localhost:9200",
@@ -95,6 +96,49 @@ def trigger_atomic(session, command, args):
     print(result.std_err)
     return result
 
+def get_latest_verdicts():
+    files = glob.glob("results/*.json")
+    latest_file = {}
+
+    for filepath in files:
+        with open(filepath, "r") as file:
+            report = json.load(file)
+        tech_id = report["technique_id"]
+
+        if tech_id not in latest_file or os.path.getmtime(filepath) > os.path.getmtime(latest_file[tech_id]):
+            latest_file[tech_id] = filepath
+
+    return latest_file
+    
+def build_heatmap():
+    latest_file = get_latest_verdicts()
+    techniques = []
+
+    for tech_id, filepath in latest_file.items():
+        with open(filepath, "r") as file:
+            report = json.load(file)
+
+        if report["verdict"] == "PASS":
+            color = "#66ff66"
+        else:
+            color = "#ff6666"
+
+        techniques.append({
+            "techniqueID": tech_id,
+            "color": color,
+            "comment": f"Verdict: {report['verdict']}, hit_count: {report['hit_count']}"
+        })
+
+    layer = {
+        "name": "Detection Coverage",
+        "versions": {"attack": "19", "navigator": "5.3.2", "layer": "4.5"},
+        "domain": "enterprise-attack",
+        "description": "Auto-generated from pipeline results",
+        "techniques": techniques
+    }
+
+    with open("heatmap_layer.json", "w") as file:
+        json.dump(layer, file)
 
 if __name__ == "__main__":
     os.makedirs("results", exist_ok=True)
@@ -153,7 +197,7 @@ if __name__ == "__main__":
             ]
         }
     ]
-
+        
     for test_case in test_cases:
         print(f"Working on: {test_case['technique_id']}")
         print(f"Triggering: {test_case['technique_id']}")
@@ -163,3 +207,5 @@ if __name__ == "__main__":
         query = convert_rule(test_case["sigma_rule_path"])[0]
         hit_count = query_rule(query)
         write_report(test_case, lint_result, validate_result, query, hit_count)
+ 
+    build_heatmap() 
