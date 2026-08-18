@@ -1,5 +1,7 @@
 # Detection Engineering as Code
 
+[![Detection Engineering Pipeline](https://github.com/mugheeskhan5/detection-engineering/actions/workflows/detection-pipeline.yml/badge.svg)](https://github.com/mugheeskhan5/detection-engineering/actions/workflows/detection-pipeline.yml)
+
 A personal lab project that simulates real MITRE ATT&CK techniques, validates hand-written Sigma detection rules against the resulting logs, and automates the entire loop — trigger → detect → report → visualize — into a version-controlled, CI/CD-driven pipeline.
 
 **Status: Complete.** All six planned phases are done: lab build, manual technique hunting, Sigma rule authoring, pipeline automation, remote triggering, and ATT&CK Navigator coverage visualization. New techniques will be added soon.
