@@ -3,9 +3,7 @@
 [![Detection Engineering Pipeline](https://github.com/mugheeskhan5/detection-engineering/actions/workflows/detection-pipeline.yml/badge.svg)](https://github.com/mugheeskhan5/detection-engineering/actions/workflows/detection-pipeline.yml)
 
 
-<p align="center">
-  <img src="https://vimeo.com/1214687237?share=copy&fl=sv&fe=ci" alt="WPA2 Docker Lab Terminal" style="width: 80%; max-width: 700px; height: auto;" />
-</p>
+[![Project Demo](https://vumbnail.com/1214687237.jpg)](https://vimeo.com/1214687237)
 
 A personal lab project that simulates real MITRE ATT&CK techniques, validates hand-written Sigma detection rules against the resulting logs, and automates the entire loop — trigger → detect → report → visualize — into a version-controlled, CI/CD-driven pipeline.
 
