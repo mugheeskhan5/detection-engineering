@@ -5,7 +5,7 @@
 
 [![Project Demo](https://vumbnail.com/1214687237.jpg)](https://vimeo.com/1214687237)
 
-A personal lab project that simulates real MITRE ATT&CK techniques, validates hand-written Sigma detection rules against the resulting logs, and automates the entire loop — trigger → detect → report → visualize — into a version-controlled, CI/CD-driven pipeline.
+A detection engineering framework that simulates MITRE ATT&CK techniques in a controlled lab, validates hand-written Sigma detection rules against generated telemetry, and automates the complete trigger → detect → validate → report → visualize workflow through a version-controlled CI/CD pipeline.
 
 **Status: Complete.** All six planned phases are done: lab build, manual technique hunting, Sigma rule authoring, pipeline automation, remote triggering, and ATT&CK Navigator coverage visualization. New techniques will be added soon.
 
